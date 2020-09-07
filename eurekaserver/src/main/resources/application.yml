@@ -1,0 +1,47 @@
+
+Spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: eureka1
+
+eureka:
+  # 通过eureka.client.registerWithEureka:false和fetchRegistry:false，来表明自己是一个eureka server
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    enable-self-preservation: true # 配置关闭自我保护
+
+---
+
+spring:
+  profiles: eureka1
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+---
+spring:
+  profiles: eureka2
+
+server:
+  port: 8762
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+
+#让多个eureka两两互相注册即可 实现了 Eureka 的高可用。一个挂了，不影响另一个
+#启动不同的eureka需改 spring.profiles.active 的值，还有要去掉 Single instance only 的勾选
