@@ -3,7 +3,7 @@ Spring:
   application:
     name: eureka-server
   profiles:
-    active: eureka1
+    active: eureka2
 
 eureka:
   # 通过eureka.client.registerWithEureka:false和fetchRegistry:false，来表明自己是一个eureka server
@@ -23,7 +23,7 @@ server:
 
 eureka:
   instance:
-    hostname: localhost
+    hostname: 192.168.10.131
   client:
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

@@ -4,7 +4,7 @@ spring:
     name: eureka-provider
 
 server:
-  port: 8001
+  port: 8002
 
 eureka:
   # 配置开启健康检查
@@ -13,4 +13,4 @@ eureka:
       enabled: true
     service-url:
       # 向每个注册中心注册
-      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
+      defaultZone: http://192.168.10.131:8762/eureka/

@@ -3,8 +3,7 @@ package eureka.eurekazuul.filiter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -26,7 +25,7 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
 @Component
 public class PreFilter extends ZuulFilter {
 
-    private static Logger log = LoggerFactory.getLogger(PreFilter.class);
+    private static Logger log =  Logger.getLogger(PreFilter.class);
 
     // 过滤器的类型，它决定过滤器在请求的哪个生命周期中执行。这里定义为 pre，代表会在请求被路由之前执行。
     @Override
@@ -56,7 +55,7 @@ public class PreFilter extends ZuulFilter {
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest request = requestContext.getRequest();
 
-        log.info("send {} request to {}", request.getMethod(), request.getRequestURL().toString());
+        log.info(String.format("send {%s} request to {%s}", request.getMethod(), request.getRequestURL().toString()));
 
         String token = request.getParameter("token");
         if (StringUtils.isEmpty(token)) {
@@ -72,6 +71,7 @@ public class PreFilter extends ZuulFilter {
             return null;
         }
         log.info("token is ok");
+        log.error("err info: this is test filebeat");
         return null;
     }
 }
